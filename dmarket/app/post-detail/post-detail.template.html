@@ -1,4 +1,15 @@
-<div class="column" ng-repeat="post in $ctrl.posts">
-  <p>{{post.title}}</p>
-  <p>{{post.text}}</p>
+<p>Comments</p>
+<div class="column" ng-repeat="comment in $ctrl.comments.data">
+
+  <p>{{comment.comment}}</p>
+  <!-- <p>{{post.text}}</p> -->
 </div>
+
+
+
+<form ng-submit="$ctrl.submit()" >
+  Enter comment:
+  <input type="text" ng-model="$ctrl.text" name="text" />
+  <input type="submit" id="submit"  value="Submit" />
+  <p >{{$ctrl.text}}</p>
+</form>

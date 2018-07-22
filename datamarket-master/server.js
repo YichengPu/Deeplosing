@@ -6,8 +6,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     Data = require('./models/data'),
     Trans = require('./models/trans'),
-    User = require('./models/user')
-
+    User = require('./models/user'),
+    Posts = require('./models/posts'),
+    Comments = require('./models/comments')
 
 // Create our Express application
 var app = express();
@@ -222,6 +223,130 @@ transRoute.put(function(req, res) {
     })
 })
 
+
+var postRoute = router.route('/posts')
+
+// get all posts
+postRoute.get(function(req, res) {
+    var sort = eval("("+req.query.sort+")");
+    var where = eval("("+req.query.where+")");
+    var select = eval("("+req.query.select+")");
+    var skip = eval("("+req.query.skip+")");
+    var limit = eval("("+req.query.limit+")");
+    var count = eval("("+req.query.count+")");
+
+    if (count == true) {
+        Posts.count(where, function(err, posts) {
+            if (err) {
+                return res.status(500).send({'message': "fail to get posts", data: []})
+            } else {
+                return res.status(200).send({'message': "got counts(posts)", data: posts})
+            }
+        }).limit(limit).skip(skip).sort(sort);
+    } else {
+        Posts.find(where, function(err, posts) {
+            if (err) {
+                return res.status(500).send({'message': "fail to get posts", data: []});
+            } else {
+                return res.status(200).send({'message': "got posts", data: posts});
+            }
+        }).limit(limit).skip(skip).sort(sort);
+    }
+})
+
+// add a trans
+postRoute.post(function(req, res) {
+    Posts.create(req.body, function(err, posts) {
+        if (err)
+            return res.status(500).send({'message': "fail to save to server", data: []});
+        else
+            return res.status(201).send({'message': "new posts created", data: posts});
+    })
+})
+
+// get a trans
+postRoute.get(function(req, res) {
+    var id = req.params.id;
+    Posts.findOne({'_id': id}, function(err, posts) {
+        if (err || posts === null)
+           return res.status(404).send({'message': "fail to get the posts", data: []});
+        else
+           return res.status(200).send({'message': "ok", data: posts});
+    })
+})
+
+// update a trans
+postRoute.put(function(req, res) {
+    var id = req.params.id;
+    Posts.findByIdAndUpdate(id, req.bodya, {new: true}, function(err, posts) {
+         if (err)
+             return res.status(500).send({'message': "fail to update", data: []});
+         else
+             return res.status(200).send({'message': "post updated", data: posts});
+    })
+})
+
+var commentRoute = router.route('/comments')
+
+// get all posts
+commentRoute.get(function(req, res) {
+    var sort = eval("("+req.query.sort+")");
+    var where = eval("("+req.query.where+")");
+    var select = eval("("+req.query.select+")");
+    var skip = eval("("+req.query.skip+")");
+    var limit = eval("("+req.query.limit+")");
+    var count = eval("("+req.query.count+")");
+
+    if (count == true) {
+        Comments.count(where, function(err, comments) {
+            if (err) {
+                return res.status(500).send({'message': "fail to get comments", data: []})
+            } else {
+                return res.status(200).send({'message': "got counts(comments)", data: comments})
+            }
+        }).limit(limit).skip(skip).sort(sort);
+    } else {
+        Comments.find(where, function(err, comments) {
+            if (err) {
+                return res.status(500).send({'message': "fail to get comments", data: []});
+            } else {
+                return res.status(200).send({'message': "got comments", data: comments});
+            }
+        }).limit(limit).skip(skip).sort(sort);
+    }
+})
+
+// add a trans
+commentRoute.post(function(req, res) {
+    Comments.create(req.body, function(err, comments) {
+        if (err)
+            return res.status(500).send({'message': "fail to save to server", data: []});
+        else
+            return res.status(201).send({'message': "new posts created", data: comments});
+    })
+})
+
+// get a trans
+commentRoute.get(function(req, res) {
+    var id = req.params.id;
+    Comments.findOne({'_id': id}, function(err, comments) {
+        if (err || posts === null)
+           return res.status(404).send({'message': "fail to get the posts", data: []});
+        else
+           return res.status(200).send({'message': "ok", data: comments});
+    })
+})
+
+// update a trans
+commentRoute.put(function(req, res) {
+    var id = req.params.id;
+    Comments.findByIdAndUpdate(id, req.bodya, {new: true}, function(err, comments) {
+         if (err)
+             return res.status(500).send({'message': "fail to update", data: []});
+         else
+             return res.status(200).send({'message': "post updated", data: comments});
+    })
+})
 // Start the server
 
 app.listen(port)

@@ -11,7 +11,7 @@ angular.
       }
       ).
       when('/posts',{
-        template:'<d-dd></d-dd>  <post-div></post-div>'
+        template:'<onepost></onepost>  <post-div></post-div>'
       }
     ).
     when('/posts/:postid',{
