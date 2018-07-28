@@ -1,6 +1,13 @@
+
+<div class="medium-6 cell">
 <form ng-submit="$ctrl.submit()" >
-  Enter text and hit enter:
-  <input type="text" ng-model="$ctrl.text" name="text" />
-  <input type="submit" id="submit"  value="Submit" />
-  <p >{{$ctrl.te}}</p>
+  发帖
+
+  <input type="text" ng-model="$ctrl.title" name="title" />
+
+  <textarea name="Text" ng-model="$ctrl.text" cols="40" rows="5"></textarea>
+  <!-- <input type="text" ng-model="$ctrl.text" name="text" /> -->
+  <input type="submit" id="submit"  value="提交" />
+  <!-- <p >{{$ctrl.te}}</p> -->
 </form>
+</div>

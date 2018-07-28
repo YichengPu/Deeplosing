@@ -21,14 +21,15 @@ angular.module('postDiv').
         var self=this;
         var time=new Date().getTime();
 
-        self.text = 'null';
-        self.te="nnn";
+        self.text ='text';
+        // self.te="nnn";
+        self.title='title';
         self.submit = function() {
           if (self.text!='null') {
-            self.te = self.text;
+            // self.te = self.text;
 
 
-            var data={id:time,text:self.text};
+            var data={id:time,title:self.title,text:self.text};
             var config = {
                         headers : {
                             'Content-Type': 'application/x-www-form-urlencoded'

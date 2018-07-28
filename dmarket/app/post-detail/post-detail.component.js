@@ -10,9 +10,16 @@ angular.
         var self=this;
         var post_id=$routeParams.postid;
 
+        console.log("http://localhost:3000/api/posts?where={'id':"+$routeParams.postid+"}")
+        $http.get("http://localhost:3000/api/posts?where={'id':"+$routeParams.postid+"}").then(function(response){
+          self.post=response.data;
+          console.log(self.post.data[0])
+        });
+        // console.log(self.post)
+
         $http.get("http://localhost:3000/api/comments?where={'postid':"+$routeParams.postid+"}").then(function(response){
           self.comments=response.data;
-          console.log(self.comments)
+          // console.log(self.comments)
         });
 
         self.submit = function() {

@@ -7,15 +7,15 @@ angular.
     $locationProvider.hashPrefix('!');
     $routeProvider.
       when('/index',{
-          template:'<index-page></index-page>'
+          template:'<post-div></post-div> <onepost></onepost>  '
       }
       ).
-      when('/posts',{
-        template:'<onepost></onepost>  <post-div></post-div>'
-      }
-    ).
+    //   when('/posts',{
+    //     template:'<onepost></onepost>  <post-div></post-div>'
+    //   }
+    // ).
     when('/posts/:postid',{
-      template:'<post-detail><post-detail>'
+      template:'<post-detail></post-detail>'
     }
     ).
     otherwise('/index');

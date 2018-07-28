@@ -1,15 +1,26 @@
-<p>Comments</p>
-<div class="column" ng-repeat="comment in $ctrl.comments.data">
+<div class='row'>
+  <h3>{{$ctrl.post.data[0].title}}</h3>
 
-  <p>{{comment.comment}}</p>
-  <!-- <p>{{post.text}}</p> -->
+  <p >{{$ctrl.post.data[0].text}}</p>
 </div>
 
 
+<!-- <p>评论</p> -->
+<div class='row'>
+  <div class="callout" ng-repeat="comment in $ctrl.comments.data">
 
+    <p>{{comment.comment}}</p>
+    <!-- <p>{{post.text}}</p> -->
+
+  </div>
+</div>
+
+
+<div class="medium-6 cell">
 <form ng-submit="$ctrl.submit()" >
-  Enter comment:
-  <input type="text" ng-model="$ctrl.text" name="text" />
-  <input type="submit" id="submit"  value="Submit" />
+  评论
+  <textarea name="Text" ng-model="$ctrl.text" cols="1" rows="2"></textarea>
+  <input type="submit" id="submit"  value="提交" />
   <p >{{$ctrl.text}}</p>
 </form>
+</div>
