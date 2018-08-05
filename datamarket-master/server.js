@@ -73,7 +73,7 @@ usersRoute.post(function(req, res) {
 });
 
 // get a user detail
-var userDetailRoute = router.route('/users:id')
+var userDetailRoute = router.route('/users/:id')
 userDetailRoute.get(function (req, res){
     var id = req.params.id;
     User.findOne({'_id': id}, function(err, user) {
@@ -137,7 +137,7 @@ dataRoute.post(function(req, res) {
     })
 })
 
-var dataDetailRoute = router.route('/data:id')
+var dataDetailRoute = router.route('/data/:id')
 
 // get dataset detail
 dataDetailRoute.get(function(req, res) {
@@ -201,8 +201,9 @@ transRoute.post(function(req, res) {
     })
 })
 
+var transDetailRoute = router.route('/trans/:id')
 // get a trans
-transRoute.get(function(req, res) {
+transDetailRoute.get(function(req, res) {
     var id = req.params.id;
     Trans.findOne({'_id': id}, function(err, trans) {
         if (err || trans === null)
@@ -213,7 +214,7 @@ transRoute.get(function(req, res) {
 })
 
 // update a trans
-transRoute.put(function(req, res) {
+transDetailRoute.put(function(req, res) {
     var id = req.params.id;
     Trans.findByIdAndUpdate(id, req.bodya, {new: true}, function(err, tran) {
          if (err)
@@ -264,8 +265,10 @@ postRoute.post(function(req, res) {
     })
 })
 
+var postDetailRoute = router.route('/posts/:id')
+
 // get a trans
-postRoute.get(function(req, res) {
+postDetailRoute.get(function(req, res) {
     var id = req.params.id;
     Posts.findOne({'_id': id}, function(err, posts) {
         if (err || posts === null)
@@ -276,7 +279,7 @@ postRoute.get(function(req, res) {
 })
 
 // update a trans
-postRoute.put(function(req, res) {
+postDetailRoute.put(function(req, res) {
     var id = req.params.id;
     Posts.findByIdAndUpdate(id, req.bodya, {new: true}, function(err, posts) {
          if (err)
@@ -326,8 +329,9 @@ commentRoute.post(function(req, res) {
     })
 })
 
+var commentDetailRoute = router.route('/comments/:id')
 // get a trans
-commentRoute.get(function(req, res) {
+commentDetailRoute.get(function(req, res) {
     var id = req.params.id;
     Comments.findOne({'_id': id}, function(err, comments) {
         if (err || posts === null)
@@ -338,7 +342,7 @@ commentRoute.get(function(req, res) {
 })
 
 // update a trans
-commentRoute.put(function(req, res) {
+commentDetailRoute.put(function(req, res) {
     var id = req.params.id;
     Comments.findByIdAndUpdate(id, req.bodya, {new: true}, function(err, comments) {
          if (err)

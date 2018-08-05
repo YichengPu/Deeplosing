@@ -1,13 +1,14 @@
+<div class='row'>
+  <div class="medium-6 cell">
+    <form ng-submit="$ctrl.submit()" ng-init="initFirst()">
+      发帖
 
-<div class="medium-6 cell">
-<form ng-submit="$ctrl.submit()" >
-  发帖
-
-  <input type="text" ng-model="$ctrl.title" name="title" />
-
-  <textarea name="Text" ng-model="$ctrl.text" cols="40" rows="5"></textarea>
-  <!-- <input type="text" ng-model="$ctrl.text" name="text" /> -->
-  <input type="submit" id="submit"  value="提交" />
-  <!-- <p >{{$ctrl.te}}</p> -->
-</form>
+      <input type="text" ng-model="$ctrl.title" ng-minlength="1" ng-maxlength="200" name="title" />
+      <input type="text" ng-model="$ctrl.imageurl" ng-minlength="1" ng-maxlength="200" name="image" />
+      <textarea name="Text" ng-model="$ctrl.text" ng-minlength="1" ng-maxlength="100000" cols="40" rows="5"></textarea>
+      <!-- <input type="text" ng-model="$ctrl.text" name="text" /> -->
+      <input type="submit" id="submit"  value="提交" />
+      <!-- <p >{{$ctrl.te}}</p> -->
+    </form>
+  </div>
 </div>

@@ -1,11 +1,16 @@
-<div class="callout" ng-repeat="post in $ctrl.posts.data">
+<div class="row">
+  <!-- <h3>Post Permission: {{$ctrl.userinfo['post_permission']}}</h3>
+  <h3>Comment Permission: {{$ctrl.userinfo['comment_permission']}}</h3> -->
+  <div class="callout" ng-repeat="post in $ctrl.posts.data">
   <!-- <p>{{post.title}}</p>
   <p>{{post.text}}</p>
   <a href="#!/posts/{{post.id}}">{{post.title}}</a> -->
   <!-- <p>{{post}}</p> -->
-  <h5><a href="#!/posts/{{post.id}}">{{post.title}}</a></h5>
-  <p>{{post.text}}</p>
 
+    <h5><a href="#!/posts/{{post.id}}">{{post.title}}</a></h5>
+    <img <img ng-if="post.imageurl!='图片链接'" ng-src="{{post.imageurl}}"/>
+    <p>{{post.text}}</p>
+  </div>
 
 
   <!-- <p>{{post.description}}</p> -->

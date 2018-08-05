@@ -1,4 +1,4 @@
 'use strict';
 
 // Define the `phoneList` module
-angular.module('postDiv', ['ngCookies']);
+angular.module('infoPage', ['ngCookies']);

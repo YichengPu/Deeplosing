@@ -1,17 +1,15 @@
 <div class='row'>
   <h3>{{$ctrl.post.data[0].title}}</h3>
-
   <p >{{$ctrl.post.data[0].text}}</p>
+  <img ng-src="{{$ctrl.post.data[0].imageurl}}"/>
+  <!-- <p >{{$ctrl.post.data[0].imageurl}}</p> -->
 </div>
-
 
 <!-- <p>评论</p> -->
 <div class='row'>
   <div class="callout" ng-repeat="comment in $ctrl.comments.data">
-
     <p>{{comment.comment}}</p>
     <!-- <p>{{post.text}}</p> -->
-
   </div>
 </div>
 
@@ -19,8 +17,8 @@
 <div class="medium-6 cell">
 <form ng-submit="$ctrl.submit()" >
   评论
-  <textarea name="Text" ng-model="$ctrl.text" cols="1" rows="2"></textarea>
+  <textarea name="Text" ng-model="$ctrl.text" ng-minlength="1" ng-maxlength="10000" cols="1" rows="2"></textarea>
   <input type="submit" id="submit"  value="提交" />
-  <p >{{$ctrl.text}}</p>
+  <!-- <p >{{$ctrl.text}}</p> -->
 </form>
 </div>

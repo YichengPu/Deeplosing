@@ -5,11 +5,14 @@ angular.
   module('postDetail').
   component('postDetail', {
     templateUrl: 'post-detail/post-detail.template.html',
-    controller: ['$http','$routeParams',
-      function PostDetailController($http,$routeParams) {
+    controller: ['$http','$routeParams','$route','$cookies',
+      function PostDetailController($http,$routeParams,$route,$cookies) {
         var self=this;
         var post_id=$routeParams.postid;
-
+        // $cookieStore.put("person", {
+        //     name: "my name",
+        //     age: 18
+        //   });
         console.log("http://localhost:3000/api/posts?where={'id':"+$routeParams.postid+"}")
         $http.get("http://localhost:3000/api/posts?where={'id':"+$routeParams.postid+"}").then(function(response){
           self.post=response.data;
@@ -24,23 +27,69 @@ angular.
 
         self.submit = function() {
           if (self.text!='null') {
-            var time=new Date().getTime();
-            var data= {id:time,postid:post_id,comment:self.text};
-            var config = {
-                        headers : {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        transformRequest: function(obj) {
-                                     var str = [];
-                                     for (var s in obj) {
-                                       str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
-                                     }
-                                     return str.join("&");
-                     }
-                    };
-            $http.post('http://localhost:3000/api/comments',data,config).then(function(msg){
-              console.log(msg);
-            })
+
+            var getCookie = $cookies.getObject("theCookie");
+            $http.get("http://localhost:3000/api/users?where={'uid':"+getCookie+"}").then(function(response){
+              // console.log(self.userinfo.data[0])
+
+              self.userinfo=response.data.data[0];
+              if (self.userinfo==undefined){
+                self.userinfo={post_permission:0,comment_permission:0}
+              }
+              console.log(self.userinfo)
+              if (self.userinfo['comment_permission']>0){
+                // self.alert="发送成功!"
+                alert("发送成功!")
+                var time=new Date().getTime();
+                var data= {id:time,postid:post_id,comment:self.text};
+                var config = {
+                            headers : {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            transformRequest: function(obj) {
+                                         var str = [];
+                                         for (var s in obj) {
+                                           str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                                         }
+                                         return str.join("&");
+                         }
+                        };
+                $http.post('http://localhost:3000/api/comments',data,config).then(function(msg){
+                  console.log(msg);
+                })
+
+
+                var data={uid:self.userinfo['uid'],post_permission:self.userinfo['post_permission'],comment_permission:self.userinfo['comment_permission']-1};
+                var config = {
+                            headers : {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            transformRequest: function(obj) {
+                                         var str = [];
+                                         for (var s in obj) {
+                                           str.push(encodeURIComponent(s) + "=" + encodeURIComponent(obj[s]));
+                                         }
+                                         return str.join("&");
+                         }
+                        };
+                        // $http.put('/propt/' + components._id, {someValue:components.someValue})
+                console.log(self.userinfo)
+                $http.put("http://localhost:3000/api/users/"+self.userinfo._id,data,config).then(function(msg){
+                  console.log(msg);
+                })
+
+                $route.reload();
+
+
+              }
+              else{
+                alert("发帖权限不足");
+              }
+            });
+
+
+
+
           }
         };
     // var self=this

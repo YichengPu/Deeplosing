@@ -2,10 +2,19 @@
 
 angular.
   module('marketapp').
-  config(['$locationProvider','$routeProvider',
-  function config($locationProvider,$routeProvider){
+  config(['$locationProvider','$routeProvider',"$cookiesProvider",
+  function config($locationProvider,$routeProvider,$cookiesProvider){
     $locationProvider.hashPrefix('!');
+    $cookiesProvider.defaults = {
+          path:'/',
+          domain:'localhost:8000',
+          expires:(new Date().getTime()+5000),
+          secure:true
+          };
     $routeProvider.
+      when('/info',{
+          template:'<info-page></info-page>'
+      }).
       when('/index',{
           template:'<post-div></post-div> <onepost></onepost>  '
       }
@@ -18,7 +27,7 @@ angular.
       template:'<post-detail></post-detail>'
     }
     ).
-    otherwise('/index');
+    otherwise('/info');
   }
 
 ]);
