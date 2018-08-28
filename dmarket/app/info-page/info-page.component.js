@@ -9,10 +9,14 @@ angular.
     var self=this;
     var getCookie = $cookies.getObject("theCookie");
     if (getCookie==undefined){
+      var key_1=Math.floor(Math.random() * 1000);
+      var key_2=Math.floor(Math.random() * 1000);
+      var key_3=Math.floor(Math.random() * 100000);
       var time=new Date().getTime();
-
-      $cookies.putObject("theCookie",time,{expires:"Thu, 01 Oct 2018 00:00:00 GMT"});
-      var data={uid:time,post_permission:5,comment_permission:5};
+      var key=Math.floor((time/key_1+7)*key_2/3)+key_3;
+      alert(key);
+      $cookies.putObject("theCookie",key,{expires:"Thu, 01 Oct 2018 00:00:00 GMT"});
+      var data={uid:key,post_permission:5,comment_permission:30};
       var config = {
                   headers : {
                       'Content-Type': 'application/x-www-form-urlencoded'

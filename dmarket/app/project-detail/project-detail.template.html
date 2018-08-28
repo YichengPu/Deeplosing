@@ -1,11 +1,11 @@
 <div class='row'>
-  <h3>{{$ctrl.post.data[0].title}}</h3>
-  <span style="width:60%;word-break:break-all;white-space:normal;text-align:center;">{{$ctrl.post.data[0].text}}</span>
-  <div class='row' ng-if="$ctrl.post.data[0].imageurl!='图片链接'" >
-  <div class="small-6 columns" ng-if="$ctrl.post.data[0].imageurl!='图片链接'" >
-    <img class="thumbnail" ng-if="$ctrl.post.data[0].imageurl!='图片链接'"  ng-src="{{$ctrl.post.data[0].imageurl}}">
+  <h3>{{$ctrl.project.data[0].title}}</h3>
+  <span style="width:60%;word-break:break-all;white-space:normal;text-align:center;">{{$ctrl.project.data[0].text}}</span>
+  <div class='row' ng-if="$ctrl.project.data[0].imageurl!='图片链接'" >
+  <div class="small-6 columns" ng-if="$ctrl.project.data[0].imageurl!='图片链接'" >
+    <img class="thumbnail" ng-if="$ctrl.project.data[0].imageurl!='图片链接'"  ng-src="{{$ctrl.project.data[0].imageurl}}">
   </div>
-  <div class="small-6 columns" ng-if="$ctrl.post.data[0].imageurl!='图片链接'" >
+  <div class="small-6 columns" ng-if="$ctrl.project.data[0].imageurl!='图片链接'" >
   </div>
   <!-- <p >{{$ctrl.post.data[0].imageurl}}</p> -->
 </div>
@@ -13,12 +13,12 @@
 <!-- <p>评论</p> -->
 <div class='row'>
   <div class="callout" ng-repeat="comment in $ctrl.comments.data">
-
     <span style="width:60%;word-break:break-all;white-space:normal;text-align:center;">{{comment.comment}}</span>
 
     <!-- <p>{{post.text}}</p> -->
   </div>
 </div>
+
 
 <div class="medium-6 cell">
 <form ng-submit="$ctrl.submit()" >

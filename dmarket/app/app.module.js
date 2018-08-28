@@ -6,6 +6,8 @@ angular.module('marketapp', [
   'ngCookies',
   'postDetail',
   'postDiv',
+  'projectDetail',
+  'projectDiv',
   'infoPage',
   'indexPage'
 ]);

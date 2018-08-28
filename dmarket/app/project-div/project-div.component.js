@@ -1,27 +1,25 @@
 'use strict';
 
-angular.module('postDiv').
-  component('postDiv', {
-  templateUrl:'post-div/post-div.template.html',
-  controller: function PostController($http,$cookies,$routeParams,$route) {
+angular.module('projectDiv').
+  component('projectDiv', {
+  templateUrl:'project-div/project-div.template.html',
+  controller: function ProjectController($http,$cookies,$routeParams,$route) {
     var self=this;
     var page_number=Number($routeParams.pagenumber);
-    var post_per_page=12;
+    var project_per_page=12;
 
     //---------------------------------------------------------------------------------------------
     self.text='null';
-    //$http.get('posts/allposts.json').then(function(response){
-    $http.get("http://localhost:3000/api/posts?sort={'id':-1}&skip="+post_per_page*(page_number-1)+"&limit="+post_per_page).then(function(response){
-      self.posts=response.data;
-
+    $http.get("http://localhost:3000/api/projects?sort={'id':-1}&skip="+project_per_page*(page_number-1)+"&limit="+project_per_page).then(function(response){
+      self.projects=response.data;
     });
     var page_count=1;
     self.current_page=page_number;
 
     self.pages=[];
-    $http.get("http://localhost:3000/api/posts?count=true").then(function(response){
+    $http.get("http://localhost:3000/api/projects?count=true").then(function(response){
 
-      page_count=Math.floor(response.data.data/post_per_page)+1;
+      page_count=Math.floor(response.data.data/project_per_page)+1;
       self.last_page=page_count;
       console.log(page_count);
       var i;
@@ -45,8 +43,8 @@ angular.module('postDiv').
     });
     // self.pages=[1,2,3,4,5];
   }})
-  .component('onepost', {
-  templateUrl:'post-div/onepost.template.html',
+  .component('oneproject', {
+  templateUrl:'project-div/oneproject.template.html',
 
 
   controller: function SubmitController($http,$route,$cookies) {
@@ -66,12 +64,6 @@ angular.module('postDiv').
 
 //--------------------------------------------------------------------------------------------------
 
-
-//-------------------------------------------------------------------------------------------------
-
-
-
-
 //-------------------------------------------------------------------
           var getCookie = $cookies.getObject("theCookie");
 
@@ -90,7 +82,7 @@ angular.module('postDiv').
                                    return str.join("&");
                    }
                   };
-          $http.post('http://localhost:3000/api/posts',data,config).then(function(msg){
+          $http.post('http://localhost:3000/api/projects',data,config).then(function(msg){
             console.log(msg);
             // console.log(err.status);
             if (msg.status==201){

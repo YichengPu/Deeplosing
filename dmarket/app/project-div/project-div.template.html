@@ -1,0 +1,46 @@
+<div class="row">
+  <!-- <h3>Post Permission: {{$ctrl.userinfo['post_permission']}}</h3>
+  <h3>Comment Permission: {{$ctrl.userinfo['comment_permission']}}</h3> -->
+  <div class="callout" ng-repeat="project in $ctrl.projects.data">
+
+
+    <h5><a href="#!/projects/{{project.id}}">{{project.title}}</a></h5>
+    <!-- <div class="medium-6 columns"> -->
+    <div class='row'>
+    <div class="small-6 columns">
+      <img class="thumbnail" ng-if="project.imageurl!='图片链接'" ng-src="{{project.imageurl}}">
+    </div>
+    <div class="small-6 columns">
+
+    </div>
+    </div>
+      <!-- <img ng-if="project.imageurl!='图片链接'" ng-src="{{project.imageurl}}"/> -->
+    <!-- </div> -->
+    <!-- <div class="row"> -->
+
+    <span style="width:60%;word-break:break-all;white-space:normal;text-align:center;">{{project.text}}</span>
+
+    <!-- </div> -->
+
+
+  <!-- <p>{{post.description}}</p> -->
+  <!-- <a href="#!/posts/{{post.id}}">{{post.name}}</a> -->
+</div>
+</div>
+
+<nav aria-label="Pagination">
+  <ul class="pagination text-center" >
+
+    <li ng-if="$ctrl.current_page==1" class="pagination-previous disabled">上一页</li>
+    <li ng-if="$ctrl.current_page>1"><a class="pagination-previous"  href="#!/projects_all/{{$ctrl.current_page-1}}">上一页</a></li>
+
+    <li ng-repeat="page in $ctrl.pages">
+      <a ng-if="page!=$ctrl.current_page"  href="#!/projects_all/{{page}}">{{page}}</a>
+      <a ng-if="page==$ctrl.current_page"  href="#!/projects_all/{{page}}" class="current">{{page}}</a>
+    </li>
+
+    <li ng-if="$ctrl.current_page==$ctrl.last_page" class="pagination-next disabled">下一页</li>
+    <li ng-if="$ctrl.current_page<$ctrl.last_page"><a class="pagination-next"  href="#!/projects_all/{{$ctrl.current_page+1}}">下一页</a></li>
+
+  </ul>
+</nav>

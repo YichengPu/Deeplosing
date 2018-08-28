@@ -15,8 +15,12 @@ angular.
       when('/info',{
           template:'<info-page></info-page>'
       }).
-      when('/index',{
+      when('/index/:pagenumber',{
           template:'<post-div></post-div> <onepost></onepost>  '
+      }
+      ).
+      when('/projects_all/:pagenumber',{
+          template:'<project-div></project-div> <oneproject></oneproject>  '
       }
       ).
     //   when('/posts',{
@@ -25,6 +29,10 @@ angular.
     // ).
     when('/posts/:postid',{
       template:'<post-detail></post-detail>'
+    }
+    ).
+    when('/projects/:projectid',{
+      template:'<project-detail></project-detail>'
     }
     ).
     otherwise('/info');
